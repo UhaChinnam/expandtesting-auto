@@ -74,8 +74,8 @@ pipeline {
             // Archive the test reports
             junit 'reports/results.xml'
             
-            // Optionally archive playwright reports if you configure playwright to generate them
-            // archiveArtifacts artifacts: 'playwright-report/**/*', allowEmptyArchive: true
+            // Archive the screenshot proofs
+            archiveArtifacts artifacts: 'reports/screenshots/*.png', allowEmptyArchive: true
         }
     }
 }

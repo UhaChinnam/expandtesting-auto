@@ -1,3 +1,4 @@
+import os
 import re
 from playwright.sync_api import Page, expect
 
@@ -13,6 +14,10 @@ def test_login_success(page: Page):
     # Verify successful login via flash message and URL
     expect(page.locator("#flash")).to_contain_text("You logged into a secure area!")
     expect(page).to_have_url(re.compile(r".*/secure$"))
+    
+    # Save screenshot proof
+    os.makedirs("reports/screenshots", exist_ok=True)
+    page.screenshot(path="reports/screenshots/login_success.png")
 
 def test_login_failure(page: Page):
     """Test invalid login validation."""
@@ -25,3 +30,7 @@ def test_login_failure(page: Page):
     
     # Verify failure via flash message
     expect(page.locator("#flash")).to_contain_text("Your password is invalid!")
+    
+    # Save screenshot proof
+    os.makedirs("reports/screenshots", exist_ok=True)
+    page.screenshot(path="reports/screenshots/login_failure.png")

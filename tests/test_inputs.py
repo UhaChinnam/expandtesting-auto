@@ -1,3 +1,4 @@
+import os
 from playwright.sync_api import Page, expect
 
 def test_form_inputs(page: Page):
@@ -34,3 +35,7 @@ def test_form_inputs(page: Page):
     expect(page.locator("#output-text")).to_have_text("Hello World")
     expect(page.locator("#output-password")).to_have_text("Secret123!")
     expect(page.locator("#output-date")).to_have_text("2025-01-01")
+    
+    # Save screenshot proof
+    os.makedirs("reports/screenshots", exist_ok=True)
+    page.screenshot(path="reports/screenshots/form_inputs.png", full_page=True)

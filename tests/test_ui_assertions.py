@@ -1,3 +1,4 @@
+import os
 from playwright.sync_api import Page, expect
 
 def test_dynamic_controls_ui_assertions(page: Page):
@@ -45,3 +46,7 @@ def test_dynamic_controls_ui_assertions(page: Page):
     # Type into the enabled field (UI interaction assertion)
     input_field.fill("Hello Automation")
     expect(input_field).to_have_value("Hello Automation")
+    
+    # Save screenshot proof
+    os.makedirs("reports/screenshots", exist_ok=True)
+    page.screenshot(path="reports/screenshots/dynamic_controls_ui.png")

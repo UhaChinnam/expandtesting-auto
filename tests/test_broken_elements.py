@@ -1,3 +1,4 @@
+import os
 import pytest
 from playwright.sync_api import Page, expect
 
@@ -24,6 +25,10 @@ def test_broken_images(page: Page):
     # We assert that we can detect broken images
     assert broken_count > 0, "No broken images detected when there should be some."
     assert valid_count > 0, "No valid images detected when there should be at least one."
+    
+    # Save screenshot proof
+    os.makedirs("reports/screenshots", exist_ok=True)
+    page.screenshot(path="reports/screenshots/broken_images.png")
 
 def test_broken_links_network(page: Page):
     """Test broken links via analyzing HTTP responses."""
@@ -40,3 +45,7 @@ def test_broken_links_network(page: Page):
         page.get_by_role("link", name="404").click()
         
     assert len(broken_urls) > 0, "Failed to capture broken link responses"
+    
+    # Save screenshot proof
+    os.makedirs("reports/screenshots", exist_ok=True)
+    page.screenshot(path="reports/screenshots/broken_links_status.png")
