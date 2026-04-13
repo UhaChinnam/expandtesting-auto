@@ -25,8 +25,7 @@ pipeline {
                     } else {
                         bat '''
                             python -m venv venv
-                            .\\venv\\Scripts\\activate
-                            python -m pip install --upgrade pip
+                            .\\venv\\Scripts\\python.exe -m pip install --upgrade pip
                         '''
                     }
                 }
@@ -44,9 +43,8 @@ pipeline {
                         '''
                     } else {
                         bat '''
-                            .\\venv\\Scripts\\activate
-                            pip install -r requirements.txt
-                            python -m playwright install --with-deps
+                            .\\venv\\Scripts\\python.exe -m pip install -r requirements.txt
+                            .\\venv\\Scripts\\python.exe -m playwright install
                         '''
                     }
                 }
@@ -63,8 +61,7 @@ pipeline {
                         '''
                     } else {
                         bat '''
-                            .\\venv\\Scripts\\activate
-                            pytest --junitxml=reports/results.xml
+                            .\\venv\\Scripts\\pytest.exe --junitxml=reports/results.xml
                         '''
                     }
                 }
