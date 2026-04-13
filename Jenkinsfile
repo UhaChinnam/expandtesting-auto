@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        // You can set up custom python path here if your agent needs it
-        PATH = "${env.WORKSPACE}/venv/bin:${env.PATH}"
+        // Inject Python into PATH so Jenkins Windows Service can find it
+        PATH = "C:\\Users\\uhasu\\AppData\\Local\\Programs\\Python\\Python313;C:\\Users\\uhasu\\AppData\\Local\\Programs\\Python\\Python313\\Scripts;${env.WORKSPACE}\\venv\\Scripts;${env.PATH}"
     }
 
     stages {
